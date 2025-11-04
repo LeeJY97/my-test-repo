@@ -1,8 +1,9 @@
 name: CI Test
 on:
   push:
-    branches: [main, dev]
+    branches: [ main, dev ]
   pull_request:
+
 jobs:
   test:
     name: Run Unit Tests
@@ -19,14 +20,18 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+        working-directory: ./my-test-repo
 
       - name: Run Test Script
         run: npm test
+        working-directory: ./my-test-repo
 
       - name: Save Test Result
         run: |
           echo "RESULT=SUCCESS" >> $GITHUB_ENV
+        working-directory: ./my-test-repo
 
       - name: Display Result
         run: |
           echo "테스트 결과: $RESULT"
+        working-directory: ./my-test-repo
